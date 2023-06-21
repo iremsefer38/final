@@ -1,0 +1,229 @@
+---
+title: "Bireylerin Gelirleri ve Tüketimleri"
+author: 
+  - irem sefer[^1]
+bibliography: ../bibliography/biblio.bib
+csl: ../csl/apa-tr.csl
+header-includes:
+  - \usepackage{polyglossia}
+  - \setmainlanguage{turkish}
+  - \usepackage{booktabs}
+  - \usepackage{caption} 
+  - \captionsetup[table]{skip=10pt}
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 4
+    keep_tex: no
+    latex_engine: xelatex
+    number_sections: yes
+    toc: no
+geometry: margin=1in
+link-citations: yes
+urlcolor: blue
+fontsize: 12pt
+biblio-style: apalike
+abstract: |
+
+ Öncelikle kendime anket yoluyla bir veri seti oluşturdum. Bu veri setini oluştururken bireylerin tüketim alışkanlıklarını gözlemlemeyi amaç edindim. Ardından literatür taraması ile bu konuda neleri test etmem gerektiğine karar verdim. Veri setimi excele geçirirken veri setimdeki değerleri analizde kolaylık olması açısından yuvarladım. 1328tl aylık geliri olan birinin aylık gelirini 1300 şeklinde düzenledim. Veri setimdeki bazı değişkenlerin özet istatistik tablosunu çıkardım ve bunların neyi ifade ettiği hakkında bilgi verdim. Sonrasında Veri setimdeki bazı değişkenlerin yoğunluk grafiğini test ettim. Amacım bir birden çok değişkenin birbirleriyle etkileşimlerini izlemekti.Korelasyon grafiği ile bu amacımı gerçekleştirdim. Oluşturduğum grafiklerden çıkarımlarımı grafiklere not olarak düştüm. Sonuç kısmında analizimin sonuçlarından araştırma soruma yani çalışmamın amacına bulduğum cevaptan ve analizimin eksik, kusurlu yanlarından bahsederek ödevimi bitirdim. Analizimin şeffaf ve doğru olması bireylerin tüketim harcamalarını net gözlemleyebilmek için anket yaptığım kişileri yalnız yaşayan ve çalışan aylık düzenli geliri olan kişilerden seçmiştim. Araştırma sorumu Keynes'in bireyler gelirleri arttıktan sonra hemen tüketimlerini ve harcamalarını arttırmadıkları öncelikle birikime yöneldikleri tezini seçtim ve bunu test ettim. Korelasyon analizi ile bulduğum bireylerin aylık gelirleri yüksek ise birikimlerinin de yüksek olduğu idi. Bunun nedenselliğininde asgari ücret zammının yeni yapıldığından dolayı Keynes'in tezini doğrulayan bir analiz olduğunu düşündüm. Ancak atladığım bir nokta vardı asgari ücret zammının üzerinden anketi yaptığımda sadece 3 ay geçmişti ve o gün bunun yeterli olacağını düşünmüştüm ancak projeye başladıktan sonra asgari ücret zammından önce asgari ücrete göre yüksek aylık geliri olan bireylerin asgari ücret oranında zam almamış olabileceği gerçeğini fark ettim. Bu analizimin eksik kısmıydı. Bugün tekrar bir analiz yapacak olsam veri setimi oluştururken yaptığım ankete bireylerin en son ne zaman zam aldıklarını ve ne kadar zam aldıklarını eklemem gerekirdi. Korelasyon analizi ile bulduğum aylık gelir arttıkça bireylerin birikim yaptığı sonucu tam olarak şeffaf bir şekilde bana zamdan kaynaklı önce birikime yönelmeleri sonucunu vermese de aylık geliri yüksek kişilerin tasarrufa yöneldikleri analizimde kuşkusuz bir gerçek idi. 
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+<!-- ======================================================================= -->
+<!-- ============================== NOTLAR ================================= -->
+<!-- ======================================================================= -->
+[^1]: 20080296, [Github Repo](https://github.com/iremsefer38/final.git)
+
+
+# Giriş
+Bireylerin tüketimleri ve gelirleri arasında nasıl bir ilişki olduğunu, görece düşük gelirli ve görece yüksek gelirleri bireylerin tüketim harcamaları arasındaki farkları araştıracağım. Veri setimi bir kaynaktan bulmadım kendim anket yolu ile oluşturdum. Sorularımı araştırmak ve karşılaştırmak istediğim konular üzerinden seçtim. Bireylerin gelirleri ve tüketimlerini araştıracağım için veri setimi hazırlarken bir evin içinde birden fazla kişinin yaşadığı bireylerle anket yapmadım. Evin içinde birlikte yaşayan kişilerin ortak giderlerdeki kullanım payları eşit olmayabileceği gibi aynı zamanda ailesi ile yaşayan gençler ortak harcamaları ebeveynleriyle aynı oranda paylaşmayabilirler örneğin daha çok kazanan aile ekonomisine daha çok destekte bulunabilir bu gibi etkenlerden dolayı şeffaf olması amacıyla veri setimi tek başına yaşayan kişilerle sınırlandırdım. Yaşadığım site sadece 1+1 dairelerden oluştuğu ve çoğunlukla bireyler tek başına yaşadıkları için başlangıçta sitemdeki komşularıma anketimi yaptım. Komşularımdan elde ettiğim verilere, aralık değerleri belirledim. Bu aralık değerlerini ve sorularımı hazırladıktan sonra Ankara’da anketimin geri kalan kısmını tamamladım.  
+Okuduğum makalede Kocaeli Üniversitesinde yapılan bir araştırmada harcama kategorileri üzerinden anket yapılmış ancak ben sorularımı hazırlarken ülkenin içinde bulunduğu mevcut enflasyon seviyesinde bireylerin ne kadar kişisel harcama yapabildiklerini görmek istedim. Bu yüzden veri setimi hazırlarken öncelikle bireylerin mutfak harcamaları ve kiraları gibi aylık otonom harcamalarıyla ilgili bilgi edinmeye çalıştım. Sonrasında son bir yıl içerisinde kaç kere kültürel ve sanatsal aktivelere katılabildiniz gibi daha seçici ve farklı sorular sormaya çalıştım. [@ccayin2015universitelerin]
+
+## Çalışmanın Amacı
+Çalışmamın amacı, bireylerin gelirlerini otonom harcamaları dışında hangi alanlara harcadıklarını ve ne gibi kişisel harcamalar yapmayı tercih ettiklerini görmek. Örneğin gelişmiş ülkelerde olduğu gibi Türkiye’de de bireyler hobilerine bütçe ayırabiliyorlar mı veya yaş ile aylık gelir arasında bir ilişki var mı yaş arttıkça gelir de artar mı gibi birden fazla değişkenin birbirleriyle etkileşimlerini araştırmak. Aynı zamanda tüm değişkenlerin birbirleriyle etkileşimlerini test etmek. 
+Görece düşük gelirli bireylerin, kendilerine kişisel bütçe oluşturma imkanlarının olup olmadığının yanı sıra projemde görmek istediğim bir diğer konu görece yüksek bireyli kişiler, gelirlerini kendilerini geliştirmek için mi harcıyorlar yoksa daha çok birikim yapmaya mı odaklılar? 
+Keynes’e göre bireyler, gelirleri arttıktan sonra, çok hızlı bir şekilde tüketimlerini arttırmıyorlar. Bireylerin gelir artışından sonra tüketimlerini arttırmaları arasında belli bir zaman var. Öncelikle tasarruflarını sonrasında tüketimlerini arttırıyorlar. Benim veri setimde birçok asgari ücretle çalışan birey var, bu bireyler gelir artışını 3 ay önce yaşadılar. Aynı zamanda analizimde bu bireylerin 3 aylık bir sürede, tüketimlerini yeni asgari ücret seviyesine adapte edip etmediklerini inceleyerek, Keynes’in tezinin sorgulamasını yapmaya çalışacağım.
+
+## Literatür 
+
+Bireylerin gelirleri ve tüketimleri ekonomide birçok şeyin göstergesidir. Tasarruf eğilimlerini ele alırsak, bize birçok şeyi gösterir. Bireylerin tasarruf eğilimleri yüksekse bankacılık sektörü iyi çalıştığını varsaydığımız bir ülkede yatırımlarda fazla olacaktır. Yatırımların fazla olduğu ülkede üretim düzeyi de yüksektir. Bireylerin tasarruf eğilimi, bir kartopu etkisi gibi ülkenin ekonomik düzeyi için çok büyük bir önem arz eder. 
+Bireyler tasarruf yerine, kendilerini geliştirmeye yönelik tüketimlerde bulunuyorsalar bu da tasarruf eğilimi gibi bir kartopu etkisi yaratarak verimliliğin artmasından kaynaklı olarak üretimi, arttırmış olacaktır. Kendilerini geliştirmek ve dolayısıyla verimliliklerini arttırmak için harcamalarda bulunmak örneğin bir yabancı dil kursuna gitmek sosyalleşmeyi ve hayat kalitesini de artıracağından dolayı olumlu bir psikolojik etki yaratırken, verimliliklerini arttırmak yerine müze gezmek gibi kültürel ve sanatsal aktivitelere harcama yapmanın da psikolojik olarak olumlu bir etki yaratacağını araştırmalar bize gösteriyor. Dolayısıyla hobilerine zaman ayırabilen, kendini geliştirmek için bütçeye sahip olan bireyler bu olanaklara sahip olmayan bireylere göre çok daha yüksek seviyede bir verimlilik sergileyeceklerdir.  İş çıkışı bir müze gezmeye gidecek bireyin verimliliği, iş çıkışı evinde görece sağlıksız ve ucuz gıdalar tüketerek ekonomisini düzenlemeye çalışacak bireyden daha yüksek bir verimlilik göstermesi yüksek olasılıktır. [@toigonbaeva2011psikoloji,]
+
+ Bu varsayımlar sonucunda karşımıza gelişmekte olan ülkeler için 2 farklı seçenek çıkıyor. Gelişmekte olan ülkelerin gelişmesi için ihtiyaçları olanlar konusunda sadece bireylerin harcamalarıyla sınırlandırdığımızda, gelişmekte olan ülkelerin gelişmiş olabilmesi için o ülkedeki bireyler ya tasarrufta bulunmalı ya da kendilerini geliştirmeye, işgücünde verimliliği arttırmaya yönelik harcamalarda bulunmalıdır. Hükümetler de ekonomik büyüme için bu harcamaları destekleyecek politikalar yürütebilir. Bende projemde Türkiye’deki bireyler otonom harcamalarından kalan bütçelerini tasarrufa veya kendilerini geliştirmeye mi harcıyorlar yoksa farklı harcamalara mı yöneliyorlar bunu test edeceğim. Tabi ki otonom harcamalarından geriye bir bütçelerinin kalmayabileceği ihtimalini de gözden kaçırmamak gerekir.[@stuart2017seventy,]
+
+ Tüketim harcamalarını sadece ülkenin ekonomik yararı başlığında değerlendirmeye çalıştım. Bu kısımda ise tüketim harcamalarının bireylere olan etkisini değerlendirmek istiyorum. Bireyler için tüketim harcamalarındaki en önemli otonom kalemlerden biri mutfak harcamaları. Bireylerin mutfak harcamaları onların aynı zamanda sağlıklarını da ifade ediyor. Bir birey güncel olarak aylık ne kadar sağlıklı gıda ne kadar sağlıksız gıda harcaması yapıyor bunun bilgisine sahip değilim. Başlangıçta bu bilgiyi de veri setime eklemek istedim ancak genel olarak bireylerde bu bilginin net farkında olmadıkları için sağlıklı yanıtlar alamadım bu yüzden bu soruyu ve dolayısıyla kavramı yüksek mutfak harcamalarının daha sağlıklı, görece daha düşük yapılan mutfak harcamalarının daha sağlıksız hazır gıdalardan oluştuğunu varsayıyorum. Sürekli akşam yemeğini ucuza mâl etmeye çalışmak, makarna veya hazır gıda ile beslenmek doğal olarak sağlıksız bir bireye sebep olacaktır. Bazı bireyler gelir yetersizliğinden dolayı buna mecbur kalsa da bazı bireyler kişisel olarak bunu tercih edebilir. Daha fazla birikim yapmak veya farklı harcamalara daha fazla bütçe ayırabilmek için yetersiz besleniyor ve hatta bunun ciddiyetinin farkında olmayabilir. Yetersiz beslenme birçok hastalığa davet çıkartma dışında kişiye ruhsal ve psikolojik olarak da zarar veriyor.  Sinirlilik hali, unutkanlık ve kafa karışıklığı, çabuk yorulma ve halsizlik ilk dikkat çeken ruhsal ve psikolojik etkiler.[@baysal1993genccliugin,]
+
+ Elbette ki kimsenin yetersiz beslenmek zorunda kalmasını istemeyiz ancak yetersiz beslenmek zorunda kalan bireylerin ülkeye etkisine de değinmek istiyorum. Bireyi etkileyen her şey toplumları ve ülkelerin mevcut durumlarını da etkilediğinden dolayı, yetersiz beslenmenin de ülke için bir maliyeti var. Yetersiz beslenmenin yarattığı psikolojik zararın maliyetini görmezden gelirsek. Yetersiz beslenen bir birey sürekli olarak rahatsızlanabilir hatta çok daha büyük ve tedavisi maliyetli hastalıklara yakalanabilir. Türkiye’yi baz alırsak çalışan bir bireyin sürekli olarak rahatsızlanması devlete bir ekonomik sorumluluk doğuruyor. Bunun yanı sıra bireylerin yetersiz beslenmekten kaynaklı, vitamin eksikleri ve bağışıklık sisteminde zayıflamalar olası bir salgın durumunda bireylerinin birçoğunun yetersiz beslendiği bir ülkede bağışıklık sistemlerinin zayıf olması sebebiyle salgının olağandan hızlı yayılmasına ve ülkedeki tüm vatandaşlara tehlike oluşturmasına sebep olabilir. Projemde Türkiye’deki bireylerin gelirlerine oranla ne kadar mutfak harcaması yaptıklarını ve gelirleri arttıkça daha sağlıklı beslenmeye mi yoksa farklı harcamalara mı yöneldiklerini analizime ekleyeceğim. [@de2006consumption,]
+ 
+
+
+# Veri 
+
+
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(here)
+library(readr)
+library(readxl)
+istatistikdata <- read_excel("C:/Users/doguk/OneDrive/Masaüstü/iremfinal/Final/data/istatistikdata.xlsx")
+View(istatistikdata)
+                             
+```
+
+
+```{r, echo=FALSE, include=FALSE}
+istatistikdata <- istatistikdata %>%
+  janitor::clean_names()
+
+names(istatistikdata)
+
+```
+
+```{r, echo=FALSE}
+library(xtable) 
+# devtools::install_github("emraher/summarytools")
+library(summarytools)
+st_options(lang = "tr")
+```
+
+
+Ortalama olarak kira bedelinde bireylerin ödediği kira verisinin birbirlerine yakın olması, anketi yaptığım kişilerden 32 kişinin kendi apartmanımda oturan bireylere yaptığımdan dolayı sitedeki evlerin de hepsinin aynı tip olmasından kaynaklı olarak kira bedellerinin yakın olması beklediğim bir durumdu. Site de 3 yıllık olduğu için kira bedelleri çok yakın bir değer oldu. Bu benim anket yaparken gözümden kaçmış olan bir detay daha doğru bir analiz için apartmanımda yaptığım 32 kişilik anketi Ankara'nın farklı ilçelerinde de ikamet eden kişilerden seçmeliydim.
+Burada aylık ortalama birikimin 1591 tl ve aylık ortalama gelirin 10583 tl olduğunu gözlemleyebiliyorum. Asgari ücretin 8500tl olduğunu göz önünde bulundurursak ortalama olarak bireylerin asgari ücretin bir miktar üzerinde çalıştığını görebiliriz.
+Asgari ücretin bir miktar üzerine çalışan bir ortalama sahip olsam da bireyler ortalama olarak kendi hobileri için 868 tl bütçe ayırabiliyor bu da Asgari ücretin %8'i eder. 
+
+
+```{r results='asis', echo=FALSE, fig.height=3, fig.width=4} 
+istatistikdata %>%
+  select("ortalama_aylik_geliriniz_ne_kadar","aylik_ortalama_birikiminiz_ne_kadar","tatil_icin_butce_ayirabiliyor_musunuz","aylik_ne_kadar_kira_oduyorsunuz", "hobilerinize_ne_kadar_butce_ayirabiliyorsunuz", "yasiniz_kac" ) %>%
+  descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
+  xtable(caption = "Özet İstatistikler",
+         label = "tab:ozet",
+         align = c("l", "c", "c", "c", "c", "c")) %>% 
+  print(booktabs = TRUE, comment = FALSE, caption.placement = "top")
+
+
+```
+
+
+# Yöntem ve Veri Analizi
+
+Peki bireyler hobileri için %8 bütçe ayırabiliyorken, bir akşam dışarıda bir arkadaşlarıyla yemek yiyebilmek için ne kadar bütçe ayırabiliyorlar buna bakmak istiyorum. Bir akşam dışarıda çıkıp akşam yemek yiyebilmek çok basit gibi gelsede Türkiye'de bu artık bir lüks tüketim midir? Bunu görmek adına bir grafik hazırladım. Grafikte görüyorum ki Türkiye'de bireyler için dışarıdan yemek yeme oranının en yoğun olduğu kısım ayda 2 kere dışarıdan yemek yiyebilmek. Yani 15 günde bir. Ardından onu 4 ve 1 kere yemek takip ediyor. Ancak ayda 10 kere dışarıda yemek yiyen bireylerin olduğunu da görmezden gelmemek gerekir.
+
+
+```{r, echo=FALSE}
+istatistikdata %>%
+ ggplot(aes(x = ayda_ortalama_kac_kere_disarida_yemek_yiyorsunuz)) +
+ geom_histogram(aes(y = ..density..),
+                color = "red",
+                fill = "white") +
+  geom_density(alpha = 0,
+               fill = "blue")
+
+
+
+
+```
+
+Aynı sistemle bireylerin yıllık kaç kere kültür sanat etkinliklerine katıldığına bakalım. Burada yoğunluk 2 de olduğunu görüyoruz. 6 ayda ancak bir kez gidiliyor. Ancak bu kadar az bir sayının sadece ekonomik problemlerden kaynaklandığını söylemek doğru olmaz çünkü türkiyede belediyelerin ve devletin kültür ve sanat etkinliklerini çok cüzi miktarlara bazı durumlardaysa ücretsiz sunduğu etkinlikler var hepsi herkese hitap etmeyebilir ancak yılda 2 de yoğunlaşması bireylerin bunu tercih etmediğini de gösterir. Tamamen sınıfsaldır, ekonomik koşullardan kaynaklıdır demek doğru olmaz. 
+
+```{r, echo=FALSE}
+istatistikdata %>%
+ ggplot(aes(x = son_1_yil_icerisinde_kac_kere_kultur_ve_sanat_etkinliklerine_katildiniz)) +
+ geom_histogram(aes(y = ..density..),
+                color = "red",
+                fill = "white") +
+  geom_density(alpha = 0,
+               fill = "blue")
+
+
+
+```
+
+
+Bireylerin yaşları ve kültür sanat etkinliklerine katılmaları arasında bir ilişki var mı bunu görmek adına bir grafik hazırladım. Grafikten görüldüğü üzere kültür sanat etkinliklerine katılma oranı 22-26 yaş arasında yoğunluk gösteriyor. 27 yaşta yoğun bir yüksek katılım gösterirken. 28 -33 yaş arasında bu katılım yoğunluğun çok az olduğunu görüyoruz. 20 ve 21 yaşda katılımın neden yoğunluğun bu kadar düşük olduğu beni şaşırtan kısım oldu. 
+
+
+```{r, echo=FALSE}
+library("ggpubr")
+
+ggscatter(istatistikdata,
+          x= "yasiniz_kac",
+          y= "son_1_yil_icerisinde_kac_kere_kultur_ve_sanat_etkinliklerine_katildiniz",
+          color = "red",
+          size = 3,
+          add = "reg.line",
+          add.params = list(color = "blue"),
+          conf.int = FALSE,
+          cor.coef = TRUE,
+          cor.coef.coord = c(30,0),
+          cor.method = "pearson",
+          ggtheme = theme_minimal())
+
+
+
+
+
+```
+
+Bireyler kendilerini geliştirmek için bir kursa gitmek için bir bütçe ayırmak ile hobilerine bütçe ayırma değişkenlerinin ortak bir dağılıma sahip popülasyondan gelip gelmediğini test etmek amacıyla bir qq plot grafiği hazırladım. Bu iki verinin ikisininde ortalama gelir düzeyindeki bireyler için lüks tüketim ve kişisel bir harcama olduğu için ortak bir dağılımdan gelmesini beklerken aynı dağılımdan gelmediklerini gözlemledim. birbirlerine yakın değerlerde olsalarda aynı dağılımdan gelmiyorlar.
+
+```{r, echo=FALSE}
+istatistikdata %>%
+  ggplot() +
+  stat_qq(aes(sample = kendinizi_gelistirmek_icin_bir_kursa_gidiyor_musunuz_gidiyorsaniz_aylik_ne_kadar_butce_ayiriyorsunuz, color = hobilerinize_ne_kadar_butce_ayirabiliyorsunuz))+
+  stat_qq_line(aes(sample =kendinizi_gelistirmek_icin_bir_kursa_gidiyor_musunuz_gidiyorsaniz_aylik_ne_kadar_butce_ayiriyorsunuz, color = hobilerinize_ne_kadar_butce_ayirabiliyorsunuz))+
+  labs(x = "", y = "", color = "",
+       title = "Q-Q Plot")+
+  theme_minimal()
+
+
+```
+
+
+ben anketimi yaparken, araştırmak istediğim şey bu verilerin birbirleriyle olan ilişkisiydi. Bunun için bir korelasyon analizi yaptım.
+kültür ve sanat etkinlerine katılma ve diğer değişkenler arasındaki korelasyona bakarsak; hobilere bütçe ayırmak ile ikisinin arasında negatif bir korelasyon olduğunu görüyorum bu korelasyon katsayısı -0.1 olduğundan dolayı çok güçlü bir bağ olmasa da bireylerin sanat etkinliklerine katılma oranları arttıkça kendi hobilerine ayırdıkları bütçenin azaldığı anlamına gelir. birikim, kira ve yaş faktörü ise bireylerin kültür ve sanat etkinlerine katılmalarıyla ilgili bir nedensellik içermiyor. Ancak bireylerin aylik geliri ile negatif bir korelasyon var bu da -0.1 ile çok güçlü bir bağ olmasa da bireylerin gelirleri arttıkça daha az kültür sanat etkinliklerine katıldığı anlamına gelir. Yani bireylerin saant etkinlerilerine katılım oranlarının düşük olmasının altında yatan sebebin ekonomik olmadığını söylemek yanlış olmaz. Bu da kültür ve sanat etkinliklerine katılmak sınıfsaldır algısını yanlış olduğunu gösterir.
+
+Peki bireyler aylık gelirleri arttığında kültür sanat etkinlerine aktarmıyorsa bu bütçeyi neye aktarıyorlar ona bakalım. Aylık gelir ile birikim arasında 0.6 ile orta düzey pozitif bir korelasyon olduğunu görüyoruz. aslında bireylerin aylık gelirleri arttığı zaman tüketime değilde birikime yöneldiklerini gösterir. Araştırma sorularımdan biri olan Keynesin bireyler, gelirleri arttıktan sonra, çok hızlı bir şekilde tüketimlerini arttırmıyorlar. Bireylerin gelir artışından sonra tüketimlerini arttırmaları arasında belli bir zaman var. Öncelikle tasarruflarını sonrasında tüketimlerini arttırıyorlar. Tezini test etmek amaçlarımdan biriydi. Korelasyon analizinde gördüğüm üzere 0.6 pozitif korelasyon bu tezi doğruluyor. Bireyler aylık gelirleri arttıkça öncelikle tüketime yöneliyorlar. sonrasında bu sırayı, mutfak harcamaları ve kira bedelleri takip ediyor. küçük bir korelasyon bağı ile yaş faktörü de etkili ki bu da mantıklı yaş arttıkça bireylerin iş hayatındaki tecrübesi arttığından dolayı aldıkları maaşın artması normaldir.
+
+Bireylerin yaşları arttıkça hobilerine ayırdıkları bütçenin -0.1 korelasyon bağı ile azaldığını gözlemliyoruz. Bu da beklediğimiz sonuçlardan biri bireyler yaşları arttıkça kültürel etkilerden de kaynaklı olarak keyfi harcamalara çok fazla yönelmiyor olabilirler. 
+Bireylerin hobilerine ayırdıkları bütçe arttıkça, birikimlerinin azaldığını görüyoruz. kısıtlı bir bütçeyi birikimden hobiye kaydırdıkları için bu beklediğimiz bir korelasyon bağı ancak burada şaşırtıcı olan bireylerin hobilerine ayırdıkları bütçe arttıkça aylık gelirlerinin azaldığını görüyoruz. Aslında bu bize hobilerine bütçe ayırma konusunda bireylerin ısrarcı olduğunu ve aylık gelirlerini göz ardı ettiklerini gösterir.
+
+
+
+```{r, echo=FALSE, fig.height=8, fig.width=15}
+library(ggcorrplot)
+istatistikdata %>%
+  select(ortalama_aylik_geliriniz_ne_kadar, ortalama_aylik_mutfak_masrafiniz_ne_kadar, aylik_ortalama_birikiminiz_ne_kadar,son_1_yil_icerisinde_kac_kere_kultur_ve_sanat_etkinliklerine_katildiniz, aylik_ne_kadar_kira_oduyorsunuz,hobilerinize_ne_kadar_butce_ayirabiliyorsunuz, yasiniz_kac) %>%
+  cor() %>%
+  round(0.5) %>%
+  ggcorrplot(hc.order = TRUE,
+             type = "lower",
+             outline.color = "black",
+             ggtheme = ggplot2::theme_minimal,
+             colors = c(scales::muted("red"), "white", "steelblue"),
+             lab = TRUE) 
+             
+
+```
+
+
+
+
+
+# Sonuç
+Sonuç olarak; Türkiye'de bireylerin tüketim alışkanlıklarını gözlemlemeye çalıştığım bu projemde bireylerin aylık gelirleri arttıkça birikim yapmaya yöneldikleri çıkardığım sonuçlardan biriydi. Aslında Türkiye'de yaşayan bireyler için bu mantıklı değil her geçen gün enflasyonun arttığı ancak maaşın sınırlı miktarda arttığı bir ortamda ihtiyaçların erkenden alınması rasyonel olarak iktisadi anlamda mantıklı olan davranıştır. Hatta bireylerin kredi çekip daha ileride almayı planladıkları ürünleri şimdiden almalarını bekleriz. Burada davranışsal iktisatın önemini de görmüş oluyoruz bireyler her zaman rasyonel davranmıyorlar. Bu analizde başlangıçta belirlemiş olduğum keynesin bireyler gelirleri arttığında önce birikime yönelirler tezini test ettim.Bunun doğru olduğunu gördüm. Ancak bu anketi yaptığımda asgari ücret zammının üzerinden sadece 3 ay geçmişti bu yüzden asgari ücretle çalışan kişilerin daha öncede asgari ücretle çalıştığını ve zam almış olduklarını asgari ücretle çalışmayan kişilerinde asgari ücret oranında zam aldığını varsaydım. Ancak bu sadece bir varsayımdı daha iyi bir analiz için bireylerin en son ne zaman ve ne kadar zam aldıklarını da analize eklemem gerekirdi. Anketi oluştururken bu soruyu eklemek aklıma gelmemişti. 
+
+
+
+
+
+
+\newpage
+# Kaynakça {#references}
+<div id="refs"></div>
+
